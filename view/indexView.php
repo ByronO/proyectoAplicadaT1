@@ -2,7 +2,7 @@
 <!-- Navigation -->
 <?php
 include_once 'public/header.php';
-include_once 'public/navbar.php';
+include_once 'public/navH.php';
 ?>
 
 <!-- Page Content -->

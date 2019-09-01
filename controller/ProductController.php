@@ -7,33 +7,6 @@
  */
 session_start();
 
-if (!isset($_SESSION['categorias'])) {
-    $_SESSION['categorias'] = array();
-}
-
-if (!isset($_SESSION['categoriasP'])) {
-    $_SESSION['categoriasP'] = array();
-}
-
-if (!isset($_SESSION['contador1'])) {
-    $_SESSION['contador1'] = 0;
-}
-
-if (!isset($_SESSION['articulosCombo'])) {
-    $_SESSION['articulosCombo'] = array();
-}
-
-if (!isset($_SESSION['contadorA'])) {
-    $_SESSION['contadorA'] = 0;
-}
-
-if (!isset($_SESSION['preciosCombo'])) {
-    $_SESSION['preciosCombo'] = array();
-}
-
-if (!isset($_SESSION['articulos'])) {
-    $_SESSION['articulos'] = array();
-}
 
 require 'model/ProductModel.php';
 
@@ -124,7 +97,27 @@ class ProductController
 
     public function code()
     {
-        $data['code'] = rand(1, 10000);
+
+        session_start();
+        $url = 'http://192.168.1.3:64445/api/values/GetCode';
+
+        $params = array('id' => 1,'name' => 'Audio World', 'address' => 'San José' );
+        $content = json_encode($params);
+        $header = array(
+            "Content-Type: application/json",
+            "Content-Length: ".strlen($content)
+        );
+        $options = array(
+            'http' => array(
+                'method' => 'POST',
+                'content' => $content,
+                'header' => implode("\r\n", $header)
+            ));
+
+
+        $result=file_get_contents($url, false, stream_context_create($options));
+        $data = json_decode($result);
+
 
         $this->view->show('codeView.php', $data);
     }

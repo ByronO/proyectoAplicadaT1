@@ -1,4 +1,3 @@
-
 <!-- Navigation -->
 <?php
 include_once 'public/header.php';
@@ -12,10 +11,13 @@ include_once 'public/navbar.php';
 
         <h2 style="margin-top: 30px; margin-bottom: 30px">Su codigo es el siguiente</h2>
 
-        <h2 style="margin-top: 30px; margin-bottom: 30px"><?php echo $vars['code'];?></h2>
+        <?php
+        echo $vars->code;
+        ?>
 
-        <br>
-        <button type="button" class="btn btn-success"><a class="nav-link" style="color: white;" href="?controlador=Product&accion=home">Aceptar</a></button>
+        <br><br><br>
+        <button type="button" class="btn btn-success"><a class="nav-link" style="color: white;"
+                                                         href="?controlador=Product&accion=home">Aceptar</a></button>
 
     </div>
 </CENTER>
