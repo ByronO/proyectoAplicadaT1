@@ -7,6 +7,6 @@ function encriptar ($string) {
 
 function desencriptar ($string) {
     $Key = "CLAVESUPERSECRETA";
-    return rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($Key), base64_decode($string), MCRYPT_MODE_CBC, md5(md5($Key))), "\0");
+    return base64_decode($string);
+    //return rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($Key), base64_decode($string), MCRYPT_MODE_CBC, md5(md5($Key))), "\0");
 }
-

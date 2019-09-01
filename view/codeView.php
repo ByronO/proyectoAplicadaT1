@@ -2,6 +2,8 @@
 <?php
 include_once 'public/header.php';
 include_once 'public/navbar.php';
+
+require 'libs/encriptar.php';
 ?>
 
 
@@ -12,7 +14,7 @@ include_once 'public/navbar.php';
         <h2 style="margin-top: 30px; margin-bottom: 30px">Su codigo es el siguiente</h2>
 
         <?php
-        echo $vars->code;
+        echo desencriptar($vars->code);
         ?>
 
         <br><br><br>
