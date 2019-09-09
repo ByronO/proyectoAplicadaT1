@@ -69,7 +69,7 @@ include_once 'public/navbar.php';
                                                        $('#<?php echo $articulos[0].$articulos[0] ?>').val(),$('#<?php echo $articulos[0].$articulos[0].$articulos[0] ?>').val());return false;">
 
                                     <td><input type="button" class="btn btn-danger" value="Eliminar articulo"
-                                               onclick="deleteProduct(<?php echo $articulos[0] ?>);return false;">
+                                               onclick="deleteProduct(<?php echo $articulos[0] ?>, $('#<?php echo $articulos[0] ?>').val());return false;">
 
                                 </form>
                             </tr>

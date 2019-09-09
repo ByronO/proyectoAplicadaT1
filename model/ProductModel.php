@@ -30,7 +30,11 @@ QUE CORRESPONDE*/
         $consult->bindParam("4", $path, PDO::PARAM_STR, 200);
 
         $consult->execute();
+        $resultado = $consult->fetchAll();
         $consult->CloseCursor();
+
+        return $resultado;
+
 
     }
 

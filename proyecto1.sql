@@ -11,7 +11,9 @@ CREATE TABLE product(
 	idProvider int NOT NULL
 )
 
-delete from product where id = 1 or id = 2 or id = 3
+DROP TABLE PRODUCT
+SELECT * FROM PRODUCT
+delete from product where id = 4 or id =5 or id = 6 or id = 7 or id = 8 or id = 9 or id = 10
 
 INSERT INTO product (name, price, description, image, idProvider) 
 VALUES
@@ -19,43 +21,46 @@ VALUES
 	'SENNHEISER MK4 DIGITAL',
 	 135000,
 	 'El micrófono MK 4 digital combina la alta resolución sonora de un verdadero micrófono condensador con la simplicidad y fineza de las soluciones digitales.',
-	 'public/imgs/p1.jpg',
+	 'public/imgs/T1p1.jpg',
 	 1
 ), (
 	'AUDIO-TECHNICA ATH-M40X',
 	 60000,
 	 'Los  ATH-M40x incorporan una sintonización plana para ofrecer una monitorización de audio increíblemente precisa en un amplio rango de frecuencias.',
-	 'public/imgs/p2.jpg',
+	 'public/imgs/T1p2.jpg',
 	 1
 ), (
 	'AUDIO-TECHNICA ATH-M50X',
 	 95000,
 	 'Los auriculares ATH-M50x ofrecen la misma calidad de sonido, pero además disponen ahora de un cable desconectable.',
-	 'public/imgs/p3.jpg',
+	 'public/imgs/T1p3.jpg',
 	 1
 ),
 (
 	'SENNHEISER PXC 550 WIRELESS',
 	 100000,
 	 'Nada se compara con la experiencia de viajar con los audífonos PXC 550 Inalámbricos.',
-	 'public/imgs/p6.jpg',
+	 'public/imgs/T1p6.jpg',
 	 1
 ), (
 	'SENNHEISER HANDMIC DIGITAL',
 	 30000,
 	 'Un micrófono de mano dinámico y resistente con un armazón completamente de metal.',
-	 'public/imgs/p5.jpg',
+	 'public/imgs/T1p5.jpg',
 	 1
 ), (
 	'SENNHEISER RS120 II - INALAMBRICO',
 	 86000,
 	 'Escucha tu música favorita de manera inalámbrica hasta a 90 metros de distancia',
-	 'public/imgs/p3.jpg',
+	 'public/imgs/T1p3.jpg',
 	 1
 )
 
 CREATE PROCEDURE sp_getProducts()
 	SELECT * FROM product
+
+
+DROP PROCEDURE sp_registerProduct
 
 DELIMITER $$ 
 CREATE PROCEDURE sp_registerProduct(nameP varchar(50), priceP int , descriptionP varchar(200), path varchar(200))
@@ -79,11 +84,19 @@ CREATE PROCEDURE sp_registerProduct(nameP varchar(50), priceP int , descriptionP
 		ROLLBACK;
 	END;
 	START TRANSACTION; 
-    INSERT INTO product (name, price, description, image, idProvider) 
-    values(nameP, priceP, descriptionP, path, 1);    
-    COMMIT;
     
+     IF EXISTS(SELECT * FROM product WHERE name = nameP or description = descriptionP) THEN
+        SELECT 1 AS resultado;
+       
+    ELSE
+        INSERT INTO product (name, price, description, image, idProvider) 
+		values(nameP, priceP, descriptionP, path, 1);   
+        SELECT 0 AS resultado;
+    END IF;
+    COMMIT;
    END
+   
+   
    
    DELIMITER $$ 
 CREATE PROCEDURE sp_updateProduct(idA int, nameP varchar(50), priceP int , descriptionP varchar(200))	

@@ -20,9 +20,10 @@ function updateProduct(id, name, price, description) {
     );
 }
 
-function deleteProduct(id) {
+function deleteProduct(id, name) {
     var param = {
-        "id": id
+        "id": id,
+        "name": name
     };
     $.ajax(
         {
